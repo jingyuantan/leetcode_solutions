@@ -17,3 +17,4 @@ class Solution:
         return [ans1, ans2]
 
     print(twoSum(0, [2, 7, 11, 15], 9))
+    print(twoSum(0, [3,2,4], 6))
