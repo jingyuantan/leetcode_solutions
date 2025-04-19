@@ -1,11 +1,7 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         lst = []
-        dic = {
-            ")": "(",
-            "]": "[",
-            "}": "{"
-        }
+        dic = {")": "(", "]": "[", "}": "{"}
 
         for i in s:
             if i in "([{":
@@ -20,5 +16,4 @@ class Solution:
 
         return not lst
 
-
-    isValid(0, '()[]{}')
+    isValid(0, "()[]{}")

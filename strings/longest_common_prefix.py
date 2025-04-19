@@ -16,4 +16,4 @@ class Solution:
 
         return answer
 
-    print(longestCommonPrefix(0, ["dogs","dog","dogs"]))
+    print(longestCommonPrefix(0, ["dogs", "dog", "dogs"]))
