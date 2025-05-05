@@ -69,13 +69,23 @@ class ArrayLearn:
             - merge
             - quick
             - heap
-        TODO: A check for edge cases, such as when the array contains None values.
         Args:
             method (str, optional): The method to sort the array with. Defaults to "bubble".
+
+        Raises:
+            ValueError: If the array contains only one or less element.
+            ValueError: If the array contains None values.
+            ValueError: If the specified method is invalid.
         """
         # If the array contains only one or less element, raise an error
         if self.length <= 1:
             raise ValueError("Array contains only one or less element")
+
+        if None in self.array:
+            raise ValueError("Array contains None values")
+
+        if method not in ["bubble", "selection", "insertion", "merge", "quick", "heap"]:
+            raise ValueError("Invalid sorting method")
 
         # Sort the array using the specified method
         if method == "bubble":
@@ -90,8 +100,6 @@ class ArrayLearn:
             self._quick_sort()
         elif method == "heap":
             self._heap_sort()
-        else:
-            raise ValueError("Invalid sorting method")
 
     def _bubble_sort(self):
         """
