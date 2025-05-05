@@ -103,7 +103,7 @@ class ArrayLearn:
 
     def _bubble_sort(self):
         """
-            Helper function to sort the array using bubble sort.
+        Helper function to sort the array using bubble sort.
         This is a private method and is not intended to be used directly.
 
         Time Complexity:
@@ -124,10 +124,24 @@ class ArrayLearn:
 
         Example:
             Initial: [5, 3, 8, 4, 2]
-            Pass 1:  [3, 5, 4, 2, 8]
-            Pass 2:  [3, 4, 2, 5, 8]
-            Pass 3:  [3, 2, 4, 5, 8]
-            Pass 4:  [2, 3, 4, 5, 8]
+
+        Pass 1:
+            [3, 5, 8, 4, 2]  # 5 > 3, swap 5 and 3
+            [3, 5, 8, 4, 2]  # 5 < 8, no swap
+            [3, 5, 4, 8, 2]  # 8 > 4, swap 8 and 4
+            [3, 5, 4, 2, 8]  # 8 > 2, swap 8 and 2
+            # After pass 1, 8 is in its correct position
+
+        Pass 2:
+            [3, 5, 4, 2, 8]  # 3 < 5, no swap
+            [3, 4, 5, 2, 8]  # 5 > 4, swap 5 and 4
+            [3, 4, 2, 5, 8]  # 5 > 2, swap 5 and 2
+            # After pass 2, 8 and 5 are in their correct positions
+
+        Pass 3:
+            [2, 3, 4, 5, 8]  # 3 > 2, swap 3 and 2
+            [2, 3, 4, 5, 8]  # 3 < 4, no swap
+            # After pass 3, array is sorted
         """
         for i in range(self.length - 1):
             # Flag to check if the array is sorted
@@ -147,7 +161,7 @@ class ArrayLearn:
 
     def _selection_sort(self):
         """
-            Helper function to sort the array using selection sort.
+        Helper function to sort the array using selection sort.
         This is a private method and is not intended to be used directly.
 
         Time Complexity:
@@ -197,8 +211,66 @@ class ArrayLearn:
     def _insertion_sort(self):
         """
         Helper function to sort the array using insertion sort.
+        This is a private method and is not intended to be used directly.
+
+        Time Complexity:
+            - Best Case: O(n) when array is already sorted
+            - Worst Case: O(n^2) when array is reverse sorted
+            - Average Case: O(n^2)
+        Space Complexity: O(1) as sorting is done in-place
+
+        Algorithm:
+        1. Start from the second element and compare it with the previous element
+        2. For each element:
+            - Store the current element
+            - Compare it with all previous elements
+            - Shift larger elements to the right
+            - Place the current element in its correct position
+        3. Repeat until the array is sorted
+
+        Characteristics:
+        - Stable sorting algorithm
+        - In-place sorting (O(1) space)
+        - Performs O(n^2) comparisons and O(n^2) swaps in the worst case
+
+        Example:
+            Initial: [5, 3, 8, 4, 2]
+
+        Pass 1 (i=1, current_element=3):
+            [5, 3, 8, 4, 2]  # 3 < 5, shift 5 right
+            [3, 5, 8, 4, 2]  # 3 is in correct position
+            # After pass 1: [3, 5, 8, 4, 2] (sorted part: [3, 5])
+
+        Pass 2 (i=2, current_element=8):
+            [3, 5, 8, 4, 2]  # 8 > 5, no shift needed
+            # After pass 2: [3, 5, 8, 4, 2] (sorted part: [3, 5, 8])
+
+        Pass 3 (i=3, current_element=4):
+            [3, 5, 8, 4, 2]  # 4 < 8, shift 8 right
+            [3, 5, 4, 8, 2]  # 4 < 5, shift 5 right
+            [3, 4, 5, 8, 2]  # 4 > 3, insert 4
+            # After pass 3: [3, 4, 5, 8, 2] (sorted part: [3, 4, 5, 8])
+
+        Pass 4 (i=4, current_element=2):
+            [3, 4, 5, 8, 2]  # 2 < 8, shift 8 right
+            [3, 4, 5, 2, 8]  # 2 < 5, shift 5 right
+            [3, 4, 2, 5, 8]  # 2 < 4, shift 4 right
+            [3, 2, 4, 5, 8]  # 2 < 3, shift 3 right
+            [2, 3, 4, 5, 8]  # 2 is in correct position
+            # Array is now sorted
         """
-        pass
+        for i in range(1, self.length):
+            # Keep track of the current element
+            current_element = self.array[i]
+            j = i - 1
+
+            # Shift elements to the right to make space for the current element
+            while j >= 0 and current_element < self.array[j]:
+                self.array[j + 1] = self.array[j]
+                j -= 1
+
+            # Insert the current element into its correct position
+            self.array[j + 1] = current_element
 
     def _merge_sort(self):
         """
