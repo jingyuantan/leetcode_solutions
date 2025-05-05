@@ -103,21 +103,36 @@ class ArrayLearn:
 
     def _bubble_sort(self):
         """
-        Helper function to sort the array using bubble sort.
+            Helper function to sort the array using bubble sort.
         This is a private method and is not intended to be used directly.
 
-        Time Complexity: O(n^2)
-        Space Complexity: O(1)
+        Time Complexity:
+            - Best Case: O(n) when array is already sorted
+            - Worst Case: O(n^2) when array is reverse sorted
+            - Average Case: O(n^2)
+        Space Complexity: O(1) as sorting is done in-place
 
-        Bubble sort works by:
-        - Iterating through the array
-        - Comparing each element with the next element
-        - Swapping the elements if the next element is smaller than the current element
-        - Repeating the process until the array is sorted
+        Algorithm:
+        1. Compare adjacent elements and swap if they are in wrong order
+        2. After each pass, the largest unsorted element "bubbles up" to its correct position
+        3. Optimization: If no swaps occur in a pass, array is sorted
+
+        Characteristics:
+        - Not stable (may change relative order of equal elements)
+        - In-place sorting (O(1) space)
+        - Performs O(n^2) comparisons and O(n^2) swaps in the worst case
+
+        Example:
+            Initial: [5, 3, 8, 4, 2]
+            Pass 1:  [3, 5, 4, 2, 8]
+            Pass 2:  [3, 4, 2, 5, 8]
+            Pass 3:  [3, 2, 4, 5, 8]
+            Pass 4:  [2, 3, 4, 5, 8]
         """
         for i in range(self.length - 1):
             # Flag to check if the array is sorted
             swapped = False
+
             for j in range(self.length - i - 1):
                 # If the next element is smaller than the current element, swap the elements
                 if self.array[j + 1] < self.array[j]:
@@ -126,23 +141,40 @@ class ArrayLearn:
                     # Set the flag to True as the array is not sorted
                     swapped = True
 
-            # If the array is sorted, break the loop as the array is already sorted
+            # If no swaps occurred in this pass, array is sorted
             if not swapped:
                 break
 
     def _selection_sort(self):
         """
-        Helper function to sort the array using selection sort.
+            Helper function to sort the array using selection sort.
         This is a private method and is not intended to be used directly.
 
-        Time Complexity: O(n^2)
-        Space Complexity: O(1)
+        Time Complexity:
+            - Best Case: O(n^2)
+            - Worst Case: O(n^2)
+            - Average Case: O(n^2)
+        Space Complexity: O(1) as sorting is done in-place
 
-        Selection sort works by:
-        - Iterating through the array
-        - Finding the minimum element in the array
-        - Swapping the minimum element with the first element
-        - Repeating the process until the array is sorted
+        Algorithm:
+        1. Divide array into sorted and unsorted parts
+        2. Find minimum element in unsorted part
+        3. Swap it with first element of unsorted part
+        4. Move boundary between sorted and unsorted parts one element to the right
+        5. Repeat until array is sorted
+
+        Characteristics:
+        - Always performs O(n) swaps
+        - Not stable (may change relative order of equal elements)
+        - Performs well on small arrays
+        - Less efficient than insertion sort for nearly sorted arrays
+
+        Example:
+            Initial: [64, 25, 12, 22, 11]
+            Pass 1:  [11, 25, 12, 22, 64]  # 11 is minimum, swap with 64
+            Pass 2:  [11, 12, 25, 22, 64]  # 12 is minimum, swap with 25
+            Pass 3:  [11, 12, 22, 25, 64]  # 22 is minimum, swap with 25
+            Pass 4:  [11, 12, 22, 25, 64]  # 25 is minimum, no swap needed
         """
         for i in range(self.length - 1):
             # Keep track of the index of the minimum element
@@ -154,7 +186,8 @@ class ArrayLearn:
                 if self.array[j] < self.array[min_index]:
                     min_index = j
 
-            # Swap the minimum element with the first element if the index of the minimum element is not the first element
+            # Swap the minimum element with the first element of unsorted part
+            # Only swap if the minimum element is not already in its correct position
             if min_index != i:
                 self.array[i], self.array[min_index] = (
                     self.array[min_index],
