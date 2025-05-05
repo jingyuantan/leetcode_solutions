@@ -146,8 +146,12 @@ class ArrayLearn:
                 if self.array[j] < self.array[min_index]:
                     min_index = j
 
-            # Swap the minimum element with the first element
-            self.array[i], self.array[min_index] = self.array[min_index], self.array[i]
+            # Swap the minimum element with the first element if the index of the minimum element is not the first element
+            if min_index != i:
+                self.array[i], self.array[min_index] = (
+                    self.array[min_index],
+                    self.array[i],
+                )
 
     def _insertion_sort(self):
         """
